@@ -14,14 +14,17 @@ public class FileCRUD {
                     Card card = new Card(Long.parseLong(mas[0]), mas[1], mas[2], Integer.parseInt(mas[3]));
                     list.add(card);
                 }catch (NumberFormatException e){
-                    System.out.println(e.fillInStackTrace()+" File data format");
+                    System.out.println(e.getMessage());
+                    System.out.println("Error parse number");
                 }
             }
             br.close();
         } catch (FileNotFoundException e) {
-            throw new IllegalArgumentException("file not found");
+            System.out.println(e.getMessage());
+            System.out.println("file not found");
         } catch (IOException e) {
-            throw  new IllegalArgumentException("IO Exception");
+            System.out.println(e.getMessage());
+            System.out.println("IO Exception");
         }
         return list;
     }
@@ -35,7 +38,7 @@ public class FileCRUD {
         try {
             writer = new BufferedWriter(new FileWriter(newF, true));
         } catch (IOException e) {
-            System.out.println("Error create BufferedWriter. "+e.getStackTrace());
+            System.out.println("Error create BufferedWriter. "+e.getMessage());
         }
         String lineSeparator = System.getProperty("line.separator");
         for(Card card : list){
